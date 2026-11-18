@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Floranze — Brownies e Cookies</title>
+<meta name="description" content="Floranze — cookies artesanais, brownies e cafés em Santa Inês/MA. Sabores que florescem com afeto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --marfim:#f7f2ec; --cacau:#3e261d; --vinho:#540111; --creme:#e2d9ca; --espresso:#2b211e;
+  --dourado:#c99a62; --caramelo:#b8743a;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--marfim);color:var(--cacau);line-height:1.65;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased}
+.hero,.band,.about,.visit,.footer{overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.container{width:min(1180px,90%);margin-inline:auto}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08}
+.eyebrow{font-size:.76rem;letter-spacing:.34em;text-transform:uppercase;font-weight:500;color:var(--caramelo)}
+
+/* Botões */
+.btn{--bg:var(--vinho);--fg:var(--marfim);position:relative;display:inline-flex;align-items:center;gap:.65rem;padding:.95rem 1.6rem;border-radius:100px;background:var(--bg);color:var(--fg);font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;overflow:hidden;isolation:isolate;border:1px solid var(--bg);cursor:pointer;font-family:var(--sans);transition:transform .5s var(--ease),box-shadow .5s var(--ease),color .4s}
+.btn::after{content:"";position:absolute;inset:0;background:var(--cacau);transform:translateY(101%);transition:transform .55s var(--ease);z-index:-1}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 28px -12px rgba(84,1,17,.55)}
+.btn:hover::after{transform:none}
+.btn svg{width:17px;height:17px;flex-shrink:0}
+.btn--outline{--bg:transparent;--fg:var(--vinho);border-color:var(--vinho)}
+.btn--outline::after{background:var(--vinho)}
+.btn--outline:hover{color:var(--marfim)}
+.btn--cream{--bg:var(--marfim);--fg:var(--cacau);border-color:var(--marfim)}
+.btn--cream::after{background:var(--dourado)}
+.btn--ghost{--bg:transparent;--fg:var(--marfim);border-color:rgba(247,242,236,.45)}
+.btn--ghost::after{background:var(--marfim)}
+.btn--ghost:hover{color:var(--cacau)}
+
+/* Topo / navegação */
+.nav{position:fixed;inset:0 0 auto;z-index:50;padding:1.1rem 0;transition:background .5s,padding .5s,box-shadow .5s}
+.nav.scrolled{background:rgba(247,242,236,.92);backdrop-filter:blur(14px);padding:.6rem 0;box-shadow:0 8px 30px -18px rgba(62,38,29,.4)}
+.nav .container{display:flex;align-items:center;justify-content:space-between}
+.nav__logo{background:var(--vinho);padding:.75rem 1.1rem;border-radius:10px;box-shadow:0 10px 24px -12px rgba(84,1,17,.7);transition:transform .5s var(--ease)}
+.nav__logo:hover{transform:rotate(-2deg) scale(1.03)}
+.nav__logo img{height:26px;width:auto}
+.nav__links{display:flex;gap:.4rem;align-items:center}
+.nav__links a{font-size:.8rem;padding:.55rem 1.15rem;border-radius:100px;color:var(--cacau);transition:background .4s,color .4s,box-shadow .4s}
+.nav__links a:hover,.nav__links a.active{background:#fff;box-shadow:0 6px 16px -8px rgba(62,38,29,.45);color:var(--vinho)}
+.nav__links a.cta{background:var(--vinho);color:var(--marfim)}
+.nav__links a.cta:hover{background:var(--cacau);color:var(--marfim)}
+.nav__toggle{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;position:relative;z-index:60}
+.nav__toggle span{display:block;width:24px;height:1.6px;background:var(--cacau);margin:6px auto;transition:.4s var(--ease)}
+.nav.open .nav__toggle span:nth-child(1){transform:translateY(7.6px) rotate(45deg)}
+.nav.open .nav__toggle span:nth-child(2){opacity:0}
+.nav.open .nav__toggle span:nth-child(3){transform:translateY(-7.6px) rotate(-45deg)}
+
+/* 01 HERO */
+.hero__bgimg{position:absolute;inset:-8% 0;z-index:0;background:url(img/espaco.jpg) center 40%/cover no-repeat;opacity:.14;mix-blend-mode:multiply;pointer-events:none;will-change:transform;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 60%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 60%,transparent 100%);animation:bgIn 2.2s var(--ease) both}
+@keyframes bgIn{from{opacity:0;scale:1.08}to{opacity:.14;scale:1}}
+
+.hero{position:relative;padding:9.5rem 0 0;background:linear-gradient(180deg,#efe6d9 0%,#f7f2ec 55%,#fbf8f3 100%);overflow:hidden}
+.hero__grid{display:grid;grid-template-columns:1fr 1.05fr;gap:2rem;align-items:center;min-height:610px;position:relative;z-index:2}
+.hero__text{padding-bottom:7rem}
+.hero__text .eyebrow{display:block;margin-bottom:1.4rem}
+.hero__title{font-family:var(--sans);font-weight:300;font-size:clamp(1.5rem,3vw,2.5rem);letter-spacing:.12em;text-transform:uppercase;line-height:1.2}
+.hero__title small{display:block;font-size:.55em;letter-spacing:.3em;color:var(--cacau);opacity:.75;margin:.4rem 0 .2rem}
+.hero__big{font-family:var(--serif);font-weight:500;font-size:clamp(4.6rem,11vw,9rem);line-height:.9;letter-spacing:.02em;text-transform:uppercase;background:linear-gradient(180deg,var(--caramelo),var(--vinho));-webkit-background-clip:text;background-clip:text;color:transparent;margin:.1em 0 .25em}
+.hero__tag{font-size:.82rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:2.2rem;color:var(--cacau)}
+.hero__ctas{display:flex;flex-wrap:wrap;gap:.8rem}
+.hero__visual{position:relative;height:560px;align-self:end}
+.hero__photo{position:absolute;right:0;bottom:70px;width:100%;height:480px;border-radius:240px 240px 26px 26px;overflow:hidden;box-shadow:0 50px 80px -35px rgba(62,38,29,.65);border:8px solid #fff}
+.hero__photo img{width:100%;height:120%;object-fit:cover;object-position:72% center;will-change:transform}
+.hero__ring{position:absolute;right:-16px;bottom:54px;width:calc(100% + 32px);height:512px;border:1px solid rgba(84,1,17,.3);border-radius:260px 260px 40px 40px;pointer-events:none}
+.seal{position:absolute;left:-30px;top:60px;width:132px;height:132px;border-radius:50%;background:var(--vinho);display:grid;place-items:center;z-index:3;box-shadow:0 20px 40px -15px rgba(84,1,17,.7)}
+.seal svg.t{position:absolute;inset:0;animation:spin 18s linear infinite}
+.seal b{font-family:var(--serif);font-style:italic;font-size:2.3rem;color:var(--marfim);font-weight:500}
+@keyframes spin{to{transform:rotate(360deg)}}
+.float{position:absolute;z-index:4;pointer-events:none;will-change:transform}
+.float>div{animation:bob 6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-16px) rotate(12deg)}}
+.f1{width:96px;top:0;right:-14px}.f2{width:70px;bottom:40px;left:20px}.f2>div{animation-delay:-2s}.f3{width:56px;top:46%;right:-30px}.f3>div{animation-delay:-4s}
+.hero [data-in]{opacity:0;transform:translateY(30px);animation:heroIn 1.2s var(--ease) forwards}
+.hero [data-in="1"]{animation-delay:.2s}.hero [data-in="2"]{animation-delay:.35s}.hero [data-in="3"]{animation-delay:.5s}.hero [data-in="4"]{animation-delay:.65s}.hero [data-in="5"]{animation-delay:.8s}
+@keyframes heroIn{to{opacity:1;transform:none}}
+/* borda de gotas de chocolate (como os grãos do modelo) */
+.chips{position:relative;height:120px;margin-top:-120px;z-index:3;pointer-events:none}
+.chips svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* Faixa marrom + carrossel */
+.band{position:relative;background:var(--cacau);color:var(--marfim);margin-top:-1px}
+.band::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(84,1,17,.35),transparent 65%)}
+.carousel{position:relative;z-index:5;margin-top:-62px;background:linear-gradient(180deg,#fbf6ea,#efe5d0);border-radius:42px;padding:1.5rem 4.4rem;box-shadow:0 0 0 6px var(--cacau),0 0 0 7px rgba(201,154,98,.55),0 30px 50px -22px rgba(0,0,0,.6);display:flex;align-items:center}
+.carousel__view{overflow:hidden;flex:1}
+.carousel__track{display:flex;transition:transform .8s var(--ease)}
+.slide{flex:0 0 33.3333%;display:flex;align-items:center;gap:1rem;padding:0 .8rem;color:var(--cacau)}
+.slide svg{width:84px;height:84px;flex-shrink:0;transition:transform .7s var(--ease);filter:drop-shadow(0 10px 8px rgba(62,38,29,.25))}
+.slide:hover svg{transform:rotate(-12deg) scale(1.1)}
+.slide h3{font-size:1.5rem;line-height:1.05}
+.slide small{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--caramelo);font-weight:500}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:0;background:var(--vinho);color:#fff;cursor:pointer;display:grid;place-items:center;transition:transform .4s var(--ease),background .3s;box-shadow:0 6px 14px -6px rgba(84,1,17,.8)}
+.arrow:hover{background:var(--cacau);transform:translateY(-50%) scale(1.15)}
+.arrow svg{width:16px;height:16px}
+.arrow.prev{left:1.3rem}.arrow.next{right:1.3rem}
+
+/* 02 — foto do produto (faixa marrom) */
+.feature{position:relative;z-index:2;padding:4rem 0 8rem}
+.feature__grid{display:grid;grid-template-columns:1fr 360px 1fr;gap:3.5rem;align-items:center}
+.col h2{font-size:clamp(2rem,3.2vw,2.7rem);margin-bottom:1rem}
+.col h2 em{font-style:italic;color:var(--dourado)}
+.col p{font-weight:300;color:rgba(247,242,236,.72);font-size:.98rem;margin-bottom:1.2rem}
+.col ul{list-style:none;margin:1.2rem 0 1.6rem}
+.col li{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-bottom:1px solid rgba(247,242,236,.12);font-size:.95rem;color:rgba(247,242,236,.88)}
+.col li::before{content:"✿";color:var(--dourado);font-size:.8rem}
+.col--right{text-align:left}
+.pot{position:relative;aspect-ratio:3/4.1}
+.pot__img{position:absolute;inset:0;border-radius:200px 200px 24px 24px;overflow:hidden;border:7px solid var(--marfim);box-shadow:0 40px 70px -30px rgba(0,0,0,.8)}
+.pot__img img{width:100%;height:118%;object-fit:cover;object-position:center 40%;will-change:transform}
+.pot::before{content:"";position:absolute;inset:-18px;border:1px solid rgba(201,154,98,.5);border-radius:220px 220px 40px 40px}
+.pot .float{z-index:5}
+.pf1{width:92px;top:-24px;right:-52px}.pf2{width:72px;bottom:30px;left:-56px}.pf2>div{animation-delay:-3s}.pf3{width:56px;top:40%;right:-70px}.pf3>div{animation-delay:-1.5s}
+.pot__tag{position:absolute;left:50%;bottom:-20px;transform:translateX(-50%);background:var(--vinho);color:var(--marfim);padding:.65rem 1.3rem;border-radius:100px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;z-index:6;box-shadow:0 14px 24px -10px rgba(0,0,0,.6)}
+.wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:110px;display:block;z-index:3}
+
+/* 03 — Sobre */
+.about{position:relative;padding:8rem 0 7rem;background:#fff}
+.about__head{text-align:center;margin-bottom:4rem}
+.about__head h2{font-size:clamp(2.3rem,4.6vw,3.8rem);margin-top:.8rem}
+.about__head h2 em{color:var(--vinho);font-style:italic}
+.about__grid{display:grid;grid-template-columns:.8fr 1.4fr .8fr;gap:3rem;align-items:start}
+.swirl{position:relative}
+.swirl__img{border-radius:200px 200px 22px 22px;overflow:hidden;aspect-ratio:3/4.3;box-shadow:0 36px 60px -30px rgba(62,38,29,.6);position:relative}
+.swirl__img img{width:100%;height:116%;object-fit:cover;object-position:center 30%;will-change:transform}
+.swirl .sig{position:absolute;left:50%;bottom:-24px;transform:translateX(-50%);background:var(--marfim);padding:.7rem 1.2rem;border-radius:14px;text-align:center;box-shadow:0 18px 30px -16px rgba(62,38,29,.6);white-space:nowrap}
+.sig small{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--vinho)}
+.sig span{font-family:var(--serif);font-style:italic;font-size:1.25rem}
+.story h3{font-size:2.1rem;margin-bottom:1.2rem}
+.story p{font-weight:300;color:#5a4238;margin-bottom:1rem;font-size:1.02rem}
+.story p:first-of-type::first-letter{font-family:var(--serif);float:left;font-size:4.2rem;line-height:.82;padding:.35rem .6rem 0 0;color:var(--vinho)}
+.story blockquote{font-family:var(--serif);font-style:italic;font-size:1.7rem;line-height:1.25;color:var(--vinho);border-left:2px solid var(--dourado);padding-left:1.2rem;margin:1.6rem 0}
+.story__sign{margin-top:1.6rem;font-family:var(--serif);font-style:italic;font-size:1.5rem}
+.story__sign small{display:block;font-family:var(--sans);font-style:normal;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--caramelo)}
+.special{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:3/4.3;box-shadow:0 36px 60px -30px rgba(0,0,0,.55);border:5px solid #fff;outline:1px solid rgba(62,38,29,.15);transition:transform .7s var(--ease)}
+.special:hover{transform:rotate(1.5deg) translateY(-6px)}
+.special img{position:absolute;inset:-6% 0;width:100%;height:112%;object-fit:cover;object-position:center 30%;will-change:transform}
+.special::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(43,33,30,.85),transparent 55%)}
+.special__body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:1.4rem;color:#fff}
+.special__body h4{font-family:var(--serif);font-weight:500;font-size:1.9rem;margin-bottom:.8rem;line-height:1}
+.special__body a{display:inline-flex;align-items:center;gap:.5rem;background:var(--vinho);padding:.55rem 1.1rem;border-radius:4px;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;transition:background .3s,transform .4s var(--ease)}
+.special__body a:hover{background:var(--caramelo);transform:translateX(4px)}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:5.5rem}
+.value{padding:2rem;border-radius:20px;background:var(--marfim);border:1px solid rgba(62,38,29,.08);transition:transform .6s var(--ease),background .6s,color .6s,box-shadow .6s}
+.value:hover{transform:translateY(-10px);background:var(--vinho);color:var(--marfim);box-shadow:0 30px 50px -25px rgba(84,1,17,.7)}
+.value i{font-family:var(--serif);font-size:1rem;color:var(--caramelo);font-style:italic;display:block;margin-bottom:1.2rem}
+.value:hover i{color:var(--dourado)}
+.value h3{font-size:1.6rem;margin-bottom:.5rem}
+.value p{font-size:.92rem;font-weight:300;opacity:.8}
+
+/* 04 — Localização */
+.visit{position:relative;padding:7rem 0;background:linear-gradient(180deg,#fff,var(--marfim))}
+.visit__head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:3rem}
+.visit__head h2{font-size:clamp(2.3rem,4.6vw,3.8rem);margin-top:.8rem}
+.visit__head h2 em{color:var(--vinho);font-style:italic}
+.visit__head p{max-width:400px;font-weight:300;color:#5a4238}
+.visit__wrap{position:relative;border-radius:30px;overflow:hidden;height:min(76vh,660px);min-height:500px;box-shadow:0 40px 70px -35px rgba(62,38,29,.6)}
+.visit__img{position:absolute;inset:-14% 0;background:url(img/espaco.jpg) center/cover no-repeat;will-change:transform}
+.visit__wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(43,33,30,.5),transparent 45%)}
+.visit__card{position:absolute;z-index:2;right:2rem;bottom:2rem;width:min(400px,calc(100% - 2.4rem));background:rgba(251,246,234,.95);backdrop-filter:blur(14px);border-radius:22px;padding:2rem;box-shadow:0 30px 60px -25px rgba(0,0,0,.5);border:1px solid rgba(201,154,98,.5)}
+.visit__card h3{font-size:2rem;margin-bottom:1rem}
+.info{display:flex;gap:1rem;padding:.9rem 0;border-top:1px solid rgba(62,38,29,.1)}
+.info svg{width:20px;height:20px;flex-shrink:0;color:var(--vinho);margin-top:3px}
+.info b{display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--vinho);font-weight:500}
+.info span{font-size:.97rem}
+.visit__card .btn{margin-top:1.2rem;width:100%;justify-content:center}
+.pin{position:absolute;z-index:2;left:2rem;top:2rem;display:flex;align-items:center;gap:.7rem;color:var(--marfim);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;background:rgba(43,33,30,.5);backdrop-filter:blur(8px);padding:.7rem 1.1rem;border-radius:100px}
+.pin i{width:9px;height:9px;border-radius:50%;background:#7ddc8e;animation:pulse 2s infinite}
+.pin.closed i{background:#e07a7a;animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(125,220,142,.7)}70%,100%{box-shadow:0 0 0 10px rgba(125,220,142,0)}}
+
+/* 05 — Rodapé (papel rasgado) */
+.footer{position:relative;background:var(--cacau);color:var(--marfim);padding:0 0 2rem}
+.footer .wave-top{position:absolute;left:0;right:0;top:-1px;width:100%;height:90px;transform:rotate(180deg)}
+.footer__cta{text-align:center;max-width:760px;margin:0 auto;padding:9rem 0 5rem}
+.footer__cta h2{font-size:clamp(2.3rem,5vw,4rem);margin:1rem 0 2rem}
+.footer__cta h2 em{color:var(--dourado);font-style:italic}
+.footer__cta .eyebrow{color:var(--dourado)}
+.footer__cta .row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.footer__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding:3.5rem 0;border-top:1px solid rgba(247,242,236,.12)}
+.footer__brand img{width:210px;margin-bottom:1rem}
+.footer__brand p{font-weight:300;color:rgba(247,242,236,.65);font-size:.95rem;max-width:280px}
+.footer h4{font-family:var(--sans);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--dourado);font-weight:500;margin-bottom:1.1rem}
+.footer ul{list-style:none}
+.footer li{margin-bottom:.65rem;font-weight:300;color:rgba(247,242,236,.8);font-size:.95rem}
+.footer li a{transition:color .3s}.footer li a:hover{color:var(--dourado)}
+.footer__bottom{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-top:1.8rem;border-top:1px solid rgba(247,242,236,.12);font-size:.78rem;color:rgba(247,242,236,.5);flex-wrap:wrap}
+.to-top{display:inline-flex;align-items:center;gap:.7rem;background:none;border:1px solid rgba(247,242,236,.3);color:var(--marfim);padding:.75rem 1.2rem;border-radius:100px;cursor:pointer;font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;transition:.5s var(--ease)}
+.to-top svg{width:16px;height:16px;transition:transform .5s var(--ease)}
+.to-top:hover{background:var(--marfim);color:var(--vinho)}.to-top:hover svg{transform:translateY(-4px)}
+
+.wa-float{position:fixed;right:1.3rem;bottom:1.3rem;z-index:40;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.4);transform:scale(0);transition:transform .5s var(--ease)}
+.wa-float.show{transform:scale(1)}.wa-float:hover{transform:scale(1.1)}
+.wa-float svg{width:30px;height:30px;color:#fff}
+.wa-float::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25d366;animation:ring 2.4s infinite}
+@keyframes ring{from{transform:scale(1);opacity:.7}to{transform:scale(1.6);opacity:0}}
+
+
+/* logo no topo */
+.hero__logo{display:block;width:min(540px,100%);margin:.3rem 0 1.3rem}
+.hero__logo img{width:100%;height:auto;filter:drop-shadow(0 10px 14px rgba(84,1,17,.18))}
+.hero__tag{font-size:.82rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:2rem;color:var(--cacau)}
+.hero .acard-wrap{min-width:0}
+.hero .acard-wrap--main{grid-column:1/-1}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;max-width:540px;perspective:900px}
+.acard{--mx:50%;--my:50%;position:relative;display:flex;align-items:center;gap:.85rem;padding:.95rem 1rem;border-radius:20px;background:rgba(255,255,255,.74);backdrop-filter:blur(10px);border:1px solid rgba(62,38,29,.1);box-shadow:0 14px 30px -18px rgba(62,38,29,.45);overflow:hidden;isolation:isolate;transition:transform .45s var(--ease),box-shadow .5s var(--ease),border-color .5s,background .5s,color .5s;will-change:transform}
+.acard--main{background:var(--vinho);color:var(--marfim);border-color:var(--vinho);padding:1.15rem 1.3rem}
+.acard::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(240px circle at var(--mx) var(--my),rgba(201,154,98,.38),transparent 70%);opacity:0;transition:opacity .4s}
+.acard::after{content:"";position:absolute;top:-10%;bottom:-10%;left:-60%;width:36%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .9s var(--ease);z-index:-1}
+.acard:hover{box-shadow:0 30px 44px -22px rgba(84,1,17,.55);border-color:rgba(84,1,17,.45);background:#fff}
+.acard--main:hover{background:var(--cacau);border-color:var(--cacau)}
+.acard:hover::before{opacity:1}.acard:hover::after{left:125%}
+.acard__ico{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(84,1,17,.09);color:var(--vinho);flex-shrink:0;transition:transform .6s var(--ease),background .4s,color .4s}
+.acard--main .acard__ico{background:rgba(247,242,236,.16);color:var(--marfim)}
+.acard__ico svg{width:22px;height:22px}
+.acard:hover .acard__ico{transform:rotate(-14deg) scale(1.12);background:var(--vinho);color:var(--marfim)}
+.acard--main:hover .acard__ico{background:var(--marfim);color:var(--vinho)}
+.acard b{display:block;font-weight:500;font-size:.95rem;letter-spacing:.03em;line-height:1.2}
+.acard small{display:block;font-size:.72rem;opacity:.7;letter-spacing:.05em;margin-top:2px}
+.acard__go{margin-left:auto;width:32px;height:32px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;opacity:.6;transition:transform .5s var(--ease),opacity .4s,background .4s,color .4s}
+.acard__go svg{width:14px;height:14px}
+.acard:hover .acard__go{transform:translateX(6px);opacity:1;background:var(--marfim);color:var(--vinho)}
+.hero [data-in="6"]{animation-delay:.95s}
+/* ondas de chocolate */
+.hero-wave{position:absolute;left:0;bottom:-1px;width:100%;height:120px;z-index:3;pointer-events:none;overflow:hidden}
+.hero-wave svg{position:absolute;left:0;bottom:0;width:200%;height:100%;animation:flow 22s linear infinite}
+@keyframes flow{to{transform:translateX(-50%)}}
+.drips{position:absolute;left:0;bottom:-104px;width:100%;height:150px;z-index:4;pointer-events:none;filter:drop-shadow(0 12px 10px rgba(62,38,29,.28))}
+.dr{transform-box:fill-box;transform-origin:50% 0;animation:drip ease-in-out infinite alternate}
+@keyframes drip{from{transform:scaleY(.72)}to{transform:scaleY(1.12)}}
+/* cena do cookie */
+.scene{position:relative;height:300vh;margin-top:3rem}
+.scene__stick{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;overflow:hidden}
+.scene__bgword{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-style:italic;font-size:clamp(7rem,24vw,22rem);color:transparent;-webkit-text-stroke:1px rgba(201,154,98,.2);white-space:nowrap;pointer-events:none}
+.scene__glow{position:absolute;width:min(78vw,680px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(201,154,98,.32),rgba(84,1,17,.28) 45%,transparent 70%)}
+.scene__ring{position:absolute;width:min(86vw,620px);aspect-ratio:1;will-change:transform}
+.scene__ring svg{width:100%;height:100%;overflow:visible}
+#crumbs{position:absolute;left:50%;top:50%;width:0;height:0}
+.crumb{position:absolute;left:0;top:0;border-radius:42%;will-change:transform,opacity;opacity:0}
+.scene__cookie{position:relative;width:min(64vw,440px);will-change:transform;filter:drop-shadow(0 40px 40px rgba(0,0,0,.55))}
+.scene__cookie img{width:100%;height:auto}
+.callout{position:absolute;max-width:240px;opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease);z-index:3}
+.callout.on{opacity:1;transform:none}
+.callout i{font-style:italic;font-family:var(--serif);color:var(--dourado);font-size:1.1rem;display:block}
+.callout h3{font-size:2rem;margin:.1rem 0 .4rem}
+.callout p{font-size:.92rem;font-weight:300;color:rgba(247,242,236,.78)}
+.c1{left:5%;top:24%}.c2{right:5%;top:36%;text-align:right}.c3{left:7%;bottom:16%}
+.scene__hint{position:absolute;top:2rem;left:50%;transform:translateX(-50%);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dourado);display:flex;align-items:center;gap:.7rem;white-space:nowrap}
+.scene__cta{position:absolute;bottom:2.4rem;left:50%;transform:translate(-50%,20px);opacity:0;transition:.7s var(--ease);z-index:4}
+.scene__cta.on{opacity:1;transform:translate(-50%,0)}
+.scene__cta:hover{transform:translate(-50%,-3px)}
+/* mapa */
+.visit__grid{display:grid;grid-template-columns:1.35fr 1fr;gap:1.6rem;margin-top:1.6rem}
+.mapcard{position:relative;border-radius:26px;overflow:hidden;background:#ece3d2;min-height:460px;box-shadow:0 30px 60px -35px rgba(62,38,29,.55);border:1px solid rgba(62,38,29,.08)}
+.mapcard svg.map{position:absolute;inset:0;width:100%;height:100%}
+.mapcard .st{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s var(--ease)}
+.mapcard.in .st{stroke-dashoffset:0}
+.mapcard .pinwrap{transform-box:fill-box;animation:pinfloat 3s ease-in-out infinite}
+@keyframes pinfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.mapcard .pulse{transform-box:fill-box;transform-origin:center;animation:mpulse 2.4s ease-out infinite}
+@keyframes mpulse{from{transform:scale(.4);opacity:.7}to{transform:scale(2.6);opacity:0}}
+.mapcard__bar{position:absolute;left:1rem;right:1rem;bottom:1rem;display:flex;gap:.6rem;flex-wrap:wrap;z-index:2}
+.mapcard__note{position:absolute;top:1rem;left:1rem;z-index:2;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);padding:.5rem .9rem;border-radius:100px;color:var(--vinho)}
+.infocard{background:#fff;border-radius:26px;padding:2rem;border:1px solid rgba(62,38,29,.08);box-shadow:0 30px 60px -40px rgba(62,38,29,.5);display:flex;flex-direction:column}
+.infocard h3{font-size:2rem;margin-bottom:1rem}
+.infocard .btn{margin-top:auto;justify-content:center}
+.infocard .info:last-of-type{margin-bottom:1.2rem}
+@media (max-width:900px){.visit__grid{grid-template-columns:1fr}.mapcard{min-height:0;display:flex;flex-direction:column;background:#fff}.mapcard svg.map{position:relative;inset:auto;height:400px;flex:none}.mapcard__bar{position:static;padding:1rem;gap:.6rem}.mapcard__bar .btn{flex:1 1 100%;justify-content:center}}
+@media (max-width:1020px){
+  .hero__logo{margin-inline:auto;width:min(440px,88%)}
+  .actions{margin-inline:auto;text-align:left}
+}
+@media (max-width:700px){
+  .callout{left:50%!important;right:auto!important;top:auto!important;bottom:6.5rem!important;max-width:300px;text-align:center!important;transform:translate(-50%,24px)}
+  .callout.on{transform:translate(-50%,0)}
+  .callout h3{font-size:1.7rem}
+  .scene__cta{bottom:2rem}
+}
+@media (max-width:420px){.acard small{display:none}.acard{padding:.85rem}.acard__ico{width:40px;height:40px}.acard--main small{display:block}}
+@media (prefers-reduced-motion:reduce){.scene{height:auto}.scene__stick{position:relative;height:auto;padding:5rem 0;display:block;text-align:center}.callout{position:static;opacity:1;transform:none;margin:1rem auto}.scene__cta{position:static;opacity:1;transform:none;margin-top:1.5rem}.scene__cookie{margin:0 auto}}
+
+/* Revelação */
+.reveal{opacity:0;transform:translateY(50px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.reveal.left{transform:translateX(-60px)}.reveal.right{transform:translateX(60px)}.reveal.scale{transform:scale(.92)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* Responsivo */
+@media (max-width:1020px){
+  .nav.scrolled,.nav.open{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(247,242,236,.97)}
+  .nav__toggle{display:block}
+  .nav__links{position:fixed;inset:0;background:var(--marfim);flex-direction:column;justify-content:center;gap:1rem;transform:translateY(-100%);transition:transform .7s var(--ease)}
+  .nav.open .nav__links{transform:none}
+  .nav__links a{font-size:1rem}
+  .hero__grid{grid-template-columns:1fr;gap:0}
+  .hero__text{padding-bottom:2rem;text-align:center}
+  .hero__ctas{justify-content:center}
+  .hero__visual{height:470px;max-width:560px;width:100%;margin:0 auto 4.5rem}
+  .hero__photo{height:400px}.hero__ring{height:432px}
+  .seal{left:-6px;width:104px;height:104px}.seal b{font-size:1.8rem}
+  .feature__grid{grid-template-columns:1fr;gap:3rem}
+  .pot{max-width:340px;width:100%;margin:1rem auto;order:-1}
+  .about__grid{grid-template-columns:1fr;gap:3.5rem}
+  .swirl,.special{max-width:380px;width:100%;margin:0 auto}
+  .values{grid-template-columns:1fr}
+  .footer__grid{grid-template-columns:1fr 1fr}
+  .slide{flex-basis:50%}
+}
+@media (max-width:640px){
+  .slide{flex-basis:100%}
+  .carousel{padding:1.2rem 3.6rem;border-radius:30px}
+  .slide svg{width:64px;height:64px}
+  .arrow.prev{left:.6rem}.arrow.next{right:.6rem}
+  .pf1,.pf3{display:none}.f3{display:none}
+  .visit__wrap{height:340px;min-height:0}
+  .pin{top:1rem;left:1rem}
+  .footer__grid{grid-template-columns:1fr}
+  .footer__brand{text-align:center}.footer__brand img{margin-inline:auto}.footer__brand p{margin-inline:auto}
+  .hero__ctas .btn{flex:1 1 100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}.hero [data-in]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="cookie" viewBox="0 0 100 100">
+      <path d="M50 4c9 0 13 5 20 6s14 2 18 10 0 14 3 21 7 12 3 20-12 9-16 15-6 14-15 17-15-1-22-1-14 5-21 1-7-12-11-18-11-10-9-19 7-13 7-21-2-14 4-20 13-4 19-7 12-4 20-4z" fill="#c98f52"/>
+      <path d="M50 10c8 0 12 4 18 5s12 2 15 9 0 12 3 18 6 11 3 17-11 8-14 13-5 12-13 15-13-1-19-1-12 4-18 1-6-10-10-15-9-9-8-16 6-11 6-18-2-12 4-17 11-4 17-6 10-5 18-5z" fill="#e4b97e"/>
+      <circle cx="35" cy="30" r="6" fill="#3e261d"/><circle cx="62" cy="26" r="5" fill="#3e261d"/><circle cx="70" cy="52" r="6.5" fill="#3e261d"/><circle cx="44" cy="55" r="5.5" fill="#3e261d"/><circle cx="28" cy="66" r="5" fill="#3e261d"/><circle cx="56" cy="76" r="5" fill="#3e261d"/><circle cx="78" cy="35" r="3" fill="#3e261d"/><circle cx="24" cy="46" r="3" fill="#3e261d"/>
+    </symbol>
+    <symbol id="cookieRed" viewBox="0 0 100 100">
+      <path d="M50 5c10 0 14 5 21 7s13 3 16 11-1 13 2 20 8 12 3 20-12 8-16 14-7 13-15 16-14-1-21 0-14 4-20 0-7-12-11-17-11-11-8-19 7-12 7-20-2-15 5-21 13-3 20-6 9-5 17-5z" fill="#6e0c1f"/>
+      <path d="M50 12c8 0 12 4 18 6s11 3 14 9-1 11 2 17 6 10 2 17-10 7-14 12-6 11-13 13-12-1-18 0-12 4-17 0-6-10-9-14-9-9-7-16 6-10 6-17-2-13 4-18 11-3 17-5 8-4 15-4z" fill="#8e1a2e"/>
+      <path d="M30 40c6-4 10 3 16 0M52 62c5-3 9 2 14-1M60 30c4-2 7 2 11 0" stroke="#f7f2ec" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    </symbol>
+    <symbol id="brownie" viewBox="0 0 100 100">
+      <rect x="8" y="26" width="84" height="60" rx="10" fill="#1f1713"/><rect x="8" y="18" width="84" height="56" rx="10" fill="#4a2c20"/>
+      <path d="M14 28c10-4 18 3 28-1s16 4 26 0 14 2 18 0" stroke="#6b4434" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <circle cx="30" cy="48" r="5" fill="#e4b97e"/><circle cx="62" cy="44" r="4" fill="#f7f2ec"/><circle cx="72" cy="58" r="5" fill="#8e1a2e"/><circle cx="44" cy="60" r="3.5" fill="#d9a86c"/>
+    </symbol>
+    <symbol id="pote" viewBox="0 0 100 100">
+      <path d="M16 40h68l-8 48a6 6 0 0 1-6 5H30a6 6 0 0 1-6-5z" fill="#f7f2ec" stroke="#3e261d" stroke-width="2.5"/>
+      <ellipse cx="50" cy="40" rx="34" ry="9" fill="#4a2c20"/><path d="M26 38c8 5 12-2 22 2s16-4 26-1" stroke="#f7f2ec" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <text x="50" y="76" text-anchor="middle" font-family="Cormorant Garamond,serif" font-style="italic" font-size="26" fill="#540111">F</text>
+    </symbol>
+    <symbol id="cup" viewBox="0 0 100 100">
+      <path d="M24 30h52l-6 58a6 6 0 0 1-6 5H36a6 6 0 0 1-6-5z" fill="#f7f2ec" stroke="#3e261d" stroke-width="2.5"/>
+      <rect x="20" y="22" width="60" height="10" rx="4" fill="#3e261d"/><path d="M27 48h46l-2 20H29z" fill="#540111"/>
+      <text x="50" y="64" text-anchor="middle" font-family="Cormorant Garamond,serif" font-style="italic" font-size="18" fill="#f7f2ec">F</text>
+      <path d="M40 16c0-5 6-5 6-10M54 16c0-5 6-5 6-10" stroke="#c99a62" stroke-width="3" stroke-linecap="round" fill="none"/>
+    </symbol>
+    <symbol id="iced" viewBox="0 0 100 100">
+      <path d="M26 24h48l-5 66a5 5 0 0 1-5 4H36a5 5 0 0 1-5-4z" fill="#f4e6cf" stroke="#3e261d" stroke-width="2.5"/>
+      <path d="M29 52h42l-2.5 38H31.5z" fill="#6b4434"/><rect x="34" y="58" width="13" height="13" rx="3" fill="#f7f2ec" opacity=".85" transform="rotate(-10 40 64)"/><rect x="52" y="68" width="12" height="12" rx="3" fill="#f7f2ec" opacity=".85" transform="rotate(12 58 74)"/>
+      <rect x="22" y="18" width="56" height="9" rx="4" fill="#3e261d"/><path d="M58 18L66 2" stroke="#540111" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="sacola" viewBox="0 0 100 100">
+      <path d="M20 34h60l-5 54H25z" fill="#540111"/><path d="M38 34v-8a12 12 0 0 1 24 0v8" stroke="#3e261d" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <text x="50" y="72" text-anchor="middle" font-family="Cormorant Garamond,serif" font-style="italic" font-size="32" fill="#f7f2ec">F</text>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.42 1.31-1.96 1.36-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.58-.36.77-.36h.55c.18 0 .42-.07.65.5.24.58.82 2.01.89 2.15.07.15.12.32.02.51-.1.19-.14.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.3-.13.59.17.29.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.42.29.14.46.12.63-.07.17-.2.72-.85.92-1.14.19-.29.38-.24.65-.14.26.1 1.68.79 1.97.94.29.14.48.22.55.34.07.12.07.7-.17 1.38z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="container">
+    <a href="#topo" class="nav__logo" aria-label="Floranze — início"><img src="img/logo-light.png" alt="Floranze Brownies e Cookies"></a>
+    <nav class="nav__links" id="menu">
+      <a href="#topo" class="active">Início</a>
+      <a href="#doces">Nossos doces</a>
+      <a href="#historia">Nossa história</a>
+      <a href="#visite">Localização</a>
+      <a href="https://floranze.bigd.im" target="_blank" rel="noopener" class="cta">Catálogo</a>
+    </nav>
+    <button class="nav__toggle" id="toggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<!-- 01 HERO -->
+<section class="hero" id="topo">
+  <div class="hero__bgimg" data-parallax="0.12" aria-hidden="true"></div>
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <span class="eyebrow" data-in="1">Santa Inês · Maranhão</span>
+      <h1 class="hero__logo" data-in="2"><img src="img/logo-vinho.png" alt="Floranze — Brownies e Cookies"></h1>
+      <p class="hero__tag" data-in="3">Sabores que florescem com afeto</p>
+      <div class="actions">
+        <div class="acard-wrap acard-wrap--main" data-in="4"><a class="acard acard--main" href="https://floranze.bigd.im" target="_blank" rel="noopener"><span class="acard__ico"><svg><use href="#i-bag"/></svg></span><span><b>Ver catálogo</b><small>Escolha seus doces e peça agora</small></span><span class="acard__go"><svg><use href="#i-arrow"/></svg></span></a></div>
+        <div class="acard-wrap" data-in="5"><a class="acard" href="https://wa.me/5598984360297?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener"><span class="acard__ico"><svg><use href="#i-wa"/></svg></span><span><b>WhatsApp</b><small>Fale com a gente</small></span></a></div>
+        <div class="acard-wrap" data-in="6"><a class="acard" href="#visite"><span class="acard__ico"><svg><use href="#i-pin"/></svg></span><span><b>Localização</b><small>Santa Inês · MA</small></span></a></div>
+      </div>
+    </div>
+    <div class="hero__visual" data-in="3">
+      <div class="hero__ring"></div>
+      <div class="hero__photo"><img src="img/hero.jpg" alt="Anaritha e o sócio em frente à loja Floranze" data-parallax="-0.08"></div>
+      <div class="seal">
+        <svg class="t" viewBox="0 0 132 132"><defs><path id="c1" d="M66 66m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs><text font-family="Jost" font-size="10.4" letter-spacing="3.6" fill="#e2d9ca"><textPath href="#c1">FEITO COM AFETO • RECEITAS PRÓPRIAS •</textPath></text></svg>
+        <b>F</b>
+      </div>
+      <div class="float f1" data-parallax="-0.2"><div><svg viewBox="0 0 100 100"><use href="#cookie"/></svg></div></div>
+      <div class="float f2" data-parallax="-0.3"><div><svg viewBox="0 0 100 100"><use href="#brownie"/></svg></div></div>
+      <div class="float f3" data-parallax="-0.4"><div><svg viewBox="0 0 100 100"><use href="#cookieRed"/></svg></div></div>
+    </div>
+  </div>
+  <div class="hero-wave" aria-hidden="true"><svg viewBox="0 0 2880 120" preserveAspectRatio="none"><defs><path id="wt" d="M0 62C240 8 480 8 720 55S1200 112 1440 62V121H0Z"/><linearGradient id="gl" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#5a382b"/><stop offset=".25" stop-color="#3e261d"/></linearGradient></defs><use href="#wt" fill="url(#gl)"/><use href="#wt" x="1440" fill="url(#gl)"/><path d="M0 66C240 12 480 12 720 59S1200 116 1440 66C1680 12 1920 12 2160 59S2640 116 2880 66" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2.5" stroke-linecap="round" transform="translate(0,-1)"/></svg></div>
+</section>
+
+<!-- Faixa marrom com carrossel + 02 FOTO DO PRODUTO -->
+<section class="band" id="doces">
+  <div class="container">
+    <div class="carousel reveal">
+      <button class="arrow prev" id="prev" aria-label="Anterior"><svg><use href="#i-left"/></svg></button>
+      <div class="carousel__view">
+        <div class="carousel__track" id="track">
+          <a class="slide" href="https://floranze.bigd.im" target="_blank" rel="noopener"><svg viewBox="0 0 100 100"><use href="#cookie"/></svg><div><h3>Cookies</h3><small>Artesanais</small></div></a>
+          <a class="slide" href="https://floranze.bigd.im" target="_blank" rel="noopener"><svg viewBox="0 0 100 100"><use href="#brownie"/></svg><div><h3>Brownies</h3><small>Receita própria</small></div></a>
+          <a class="slide" href="https://floranze.bigd.im" target="_blank" rel="noopener"><svg viewBox="0 0 100 100"><use href="#pote"/></svg><div><h3>Brownie no pote</h3><small>Cremoso</small></div></a>
+          <a class="slide" href="https://floranze.bigd.im" target="_blank" rel="noopener"><svg viewBox="0 0 100 100"><use href="#cup"/></svg><div><h3>Bebidas quentes</h3><small>Cafés</small></div></a>
+          <a class="slide" href="https://floranze.bigd.im" target="_blank" rel="noopener"><svg viewBox="0 0 100 100"><use href="#iced"/></svg><div><h3>Bebidas geladas</h3><small>Refrescantes</small></div></a>
+          <a class="slide" href="https://floranze.bigd.im" target="_blank" rel="noopener"><svg viewBox="0 0 100 100"><use href="#sacola"/></svg><div><h3>Retirada</h3><small>& Delivery</small></div></a>
+        </div>
+      </div>
+      <button class="arrow next" id="next" aria-label="Próximo"><svg><use href="#i-right"/></svg></button>
+    </div>
+  </div>
+
+  <!-- CENA: COOKIE ANIMADO NO SCROLL -->
+  <div class="scene" id="scene">
+    <div class="scene__stick">
+      <span class="scene__hint">Continue rolando ↓</span>
+      <div class="scene__bgword" aria-hidden="true">Cookie</div>
+      <div class="scene__glow"></div>
+      <div class="scene__ring" id="ring" aria-hidden="true"><svg viewBox="0 0 600 600"><defs><path id="ringp" d="M300 300m-262 0a262 262 0 1 1 524 0a262 262 0 1 1-524 0"/></defs><text font-family="Jost" font-size="19" letter-spacing="8" fill="#c99a62" opacity=".85" textLength="1640" lengthAdjust="spacing"><textPath href="#ringp" textLength="1640" lengthAdjust="spacing">CROCANTE POR FORA • MACIO POR DENTRO • CHOCOLATE DERRETIDO • FEITO COM AFETO • </textPath></text></svg></div>
+      <div id="crumbs" aria-hidden="true"></div>
+      <div class="scene__cookie" id="cookie"><img src="img/cookie.png" alt="Cookie artesanal Floranze partido com chocolate derretido"></div>
+      <div class="callout c1"><i>01</i><h3>Crocante por fora</h3><p>Borda dourada que estala na primeira mordida.</p></div>
+      <div class="callout c2"><i>02</i><h3>Macio por dentro</h3><p>Massa úmida, com ingredientes nobres e receita própria.</p></div>
+      <div class="callout c3"><i>03</i><h3>Chocolate derretido</h3><p>Recheio que escorre a cada pedaço. Difícil resistir.</p></div>
+      <a class="btn btn--cream scene__cta" id="sceneCta" href="https://floranze.bigd.im" target="_blank" rel="noopener">Quero meu cookie <svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="feature">
+      <div class="feature__grid">
+        <div class="col reveal left">
+          <span class="eyebrow" style="color:var(--dourado)">Nossos doces</span>
+          <h2 style="margin-top:.8rem">Cada mordida, um <em>momento especial</em></h2>
+          <p>Cookies crocantes por fora e macios por dentro, recheios generosos e sabor de receita de casa. Tudo feito com ingredientes nobres e muito carinho.</p>
+          <ul><li>Cookies artesanais</li><li>Brownies intensos e úmidos</li><li>Potes cremosos</li></ul>
+        </div>
+
+        <div class="pot reveal scale d1">
+          <div class="pot__img"><img src="img/produto.jpg" alt="Pote de brownie Floranze com recheio cremoso" data-parallax="-0.07"></div>
+          <div class="float pf1" data-parallax="-0.25"><div><svg viewBox="0 0 100 100"><use href="#cookie"/></svg></div></div>
+          <div class="float pf2" data-parallax="-0.15"><div><svg viewBox="0 0 100 100"><use href="#cookieRed"/></svg></div></div>
+          <div class="float pf3" data-parallax="-0.35"><div><svg viewBox="0 0 100 100"><use href="#brownie"/></svg></div></div>
+          <span class="pot__tag">Feito com afeto</span>
+        </div>
+
+        <div class="col col--right reveal right d2">
+          <span class="eyebrow" style="color:var(--dourado)">Para todo momento</span>
+          <h2 style="margin-top:.8rem">Peça do <em>seu jeito</em></h2>
+          <p>Aproveite um café quentinho no nosso espaço, ou leve seus doces favoritos para casa com retirada e delivery.</p>
+          <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.4rem">
+            <a href="https://floranze.bigd.im" target="_blank" rel="noopener" class="btn btn--cream">Ver catálogo <svg><use href="#i-arrow"/></svg></a>
+            <a href="https://wa.me/5598984360297?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener" class="btn btn--ghost"><svg><use href="#i-bag"/></svg> Pedir</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="drips" id="drips" viewBox="0 0 1440 150" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><defs><filter id="goo" x="-5%" y="-20%" width="110%" height="140%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter></defs></svg>
+</section>
+
+<!-- 03 SOBRE -->
+<section class="about" id="historia">
+  <div class="container">
+    <div class="about__head">
+      <span class="eyebrow reveal">Sobre nós</span>
+      <h2 class="reveal d1">Um sonho nascido na <em>cozinha de casa</em></h2>
+    </div>
+    <div class="about__grid">
+      <div class="swirl reveal left">
+        <div class="swirl__img"><img src="img/anaritha.jpg" alt="Anaritha preparando receitas na cozinha da Floranze" data-parallax="-0.07"></div>
+        <div class="sig"><small>Fundadora</small><span>Anaritha Azevedo</span></div>
+      </div>
+
+      <article class="story reveal d1">
+        <h3>Bem-vindo à Floranze</h3>
+        <p>A Floranze nasceu oficialmente em 2025, mas sua história começou muito antes, ainda na minha adolescência, na cozinha de casa, quando fazer doces já era uma forma de reunir pessoas queridas, compartilhar momentos e demonstrar carinho.</p>
+        <p>Foi com minha mãe que aprendi que cozinhar também é uma forma de amar. Dela herdei a paixão pelas receitas, pelos pequenos detalhes e pela alegria de transformar momentos simples em lembranças especiais.</p>
+        <blockquote>O que começou como um hobby se transformou em um sonho que ganhou nome: Floranze.</blockquote>
+        <p>Desde então, seguimos escrevendo essa história, levando para cada receita aquilo que sempre nos moveu: o amor por fazer doces e o desejo de criar momentos felizes.</p>
+        <p>A Floranze cresceu, ganhou seu próprio espaço e passou a fazer parte de tantas outras histórias. Mas a essência continua a mesma: transformar afeto em sabor. E é graças a cada pessoa que acredita nesse sonho e escolhe fazer parte dele que nossa história continua florescendo.</p>
+        <div class="story__sign"><small>Com carinho,</small>Anaritha Azevedo 🤎</div>
+      </article>
+
+      <aside class="special reveal right d2">
+        <img src="img/casal.jpg" alt="Anaritha e o sócio na loja Floranze" data-parallax="-0.05">
+        <div class="special__body">
+          <h4>Venha nos conhecer</h4>
+          <a href="#visite">Ver localização <svg style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="values">
+      <div class="value reveal"><i>01 —</i><h3>Ingredientes nobres</h3><p>Nosso cuidado começa na escolha dos ingredientes, valorizando sabor, qualidade e autenticidade.</p></div>
+      <div class="value reveal d1"><i>02 —</i><h3>Receitas próprias</h3><p>Criatividade e atenção aos detalhes, do sabor até a apresentação de cada produto.</p></div>
+      <div class="value reveal d2"><i>03 —</i><h3>Atendimento com afeto</h3><p>Um ambiente acolhedor e um atendimento atencioso para transformar pequenos momentos em lembranças.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 LOCALIZAÇÃO -->
+<section class="visit" id="visite">
+  <div class="container">
+    <div class="visit__head">
+      <div><span class="eyebrow reveal">Localização</span><h2 class="reveal d1">Um cantinho feito para <em>ficar</em></h2></div>
+      <p class="reveal d2">Venha conhecer nosso espaço no centro de Santa Inês: um café acolhedor para saborear com calma, ou passar rapidinho e levar seus doces favoritos.</p>
+    </div>
+    <div class="visit__wrap reveal scale">
+      <div class="visit__img" data-parallax="0.12" role="img" aria-label="Fachada da loja Floranze em Santa Inês"></div>
+      <div class="pin" id="status"><i></i><span>Aberto agora</span></div>
+    </div>
+
+    <div class="visit__grid">
+      <div class="mapcard reveal left">
+        <!-- Para um mapa interativo do Google ao hospedar o site no seu domínio, troque o <svg class="map"> abaixo por:
+        <iframe src="https://www.google.com/maps?q=-3.6604152,-45.3771547&z=17&output=embed" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" allowfullscreen></iframe> -->
+        <svg class="map" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Mapa ilustrativo da localização da Floranze na Rua Nova, Santa Inês">
+          <rect width="800" height="520" fill="#ece3d2"/>
+          <g fill="#e2d6bf">
+            <rect x="30" y="140" width="95" height="85" rx="10"/><rect x="170" y="130" width="140" height="95" rx="10"/><rect x="350" y="130" width="170" height="90" rx="10"/><rect x="570" y="120" width="110" height="100" rx="10"/><rect x="715" y="125" width="80" height="95" rx="10"/>
+            <rect x="30" y="275" width="95" height="100" rx="10"/><rect x="170" y="280" width="140" height="95" rx="10"/><rect x="350" y="285" width="170" height="90" rx="10"/><rect x="715" y="280" width="80" height="100" rx="10"/>
+            <rect x="30" y="420" width="95" height="90" rx="10"/><rect x="170" y="425" width="140" height="90" rx="10"/><rect x="350" y="430" width="170" height="85" rx="10"/><rect x="570" y="435" width="110" height="80" rx="10"/><rect x="715" y="430" width="80" height="85" rx="10"/>
+            <rect x="170" y="10" width="140" height="75" rx="10"/><rect x="350" y="10" width="170" height="70" rx="10"/><rect x="570" y="10" width="110" height="75" rx="10"/>
+          </g>
+          <rect x="570" y="280" width="115" height="100" rx="16" fill="#cddcbc"/>
+          <g fill="#b6cca2"><circle cx="595" cy="305" r="12"/><circle cx="640" cy="300" r="14"/><circle cx="665" cy="340" r="12"/><circle cx="605" cy="352" r="13"/></g>
+          <g fill="none" stroke="#fffdf8" stroke-linecap="round" stroke-width="22">
+            <path class="st" pathLength="1" d="M-20 108 L820 100"/>
+            <path class="st" pathLength="1" d="M-20 400 L820 410"/>
+            <path class="st" pathLength="1" d="M142 -20 L155 540"/>
+            <path class="st" pathLength="1" d="M332 -20 L322 540"/>
+            <path class="st" pathLength="1" d="M542 -20 L556 540"/>
+            <path class="st" pathLength="1" d="M698 -20 L690 540"/>
+          </g>
+          <path id="rn" class="st" pathLength="1" fill="none" stroke="#fffdf8" stroke-linecap="round" stroke-width="32" d="M-20 246 C200 238 600 258 820 244"/>
+          <path d="M-20 246 C200 238 600 258 820 244" fill="none" stroke="#e9dcc3" stroke-width="2" stroke-dasharray="10 12"/>
+          <text font-family="Jost" font-size="13" letter-spacing="5" fill="#8a6a58"><textPath href="#rn" startOffset="4%" dy="-24">RUA NOVA</textPath></text>
+          <text x="410" y="70" font-family="Jost" font-size="12" letter-spacing="6" fill="#a68a74" text-anchor="middle">CENTRO · SANTA INÊS</text>
+          <g transform="translate(748 470)"><circle r="20" fill="#fff" opacity=".9"/><path d="M0 -13 L5 3 L0 0 L-5 3Z" fill="#540111"/><text y="17" font-family="Jost" font-size="8" text-anchor="middle" fill="#540111">N</text></g>
+          <g transform="translate(430 248)">
+            <circle class="pulse" r="16" fill="#540111" opacity=".45"/>
+            <circle r="5" fill="#540111"/>
+            <g class="pinwrap">
+              <path d="M0 -4 C-24 -32 -28 -46 -28 -58 a28 28 0 1 1 56 0 C28 -46 24 -32 0 -4Z" fill="#540111" stroke="#fff" stroke-width="3"/>
+              <circle cy="-58" r="17" fill="#f7f2ec"/>
+              <text y="-50" font-family="Cormorant Garamond,serif" font-style="italic" font-weight="600" font-size="26" text-anchor="middle" fill="#540111">F</text>
+            </g>
+            <g transform="translate(0 30)"><rect x="-135" y="0" width="270" height="36" rx="18" fill="#fff" stroke="#e2d6bf"/><text y="24" font-family="Jost" font-size="16" font-weight="500" text-anchor="middle" fill="#3e261d">Floranze · Rua Nova, 443-B</text></g>
+          </g>
+        </svg>
+        <span class="mapcard__note">Rua Nova, 443-B · Centro</span>
+        <div class="mapcard__bar">
+          <a class="btn" href="https://www.google.com/maps/place/Floranze+-+R.+Nova+-+Centro,+Santa+In%C3%AAs+-+MA,+65300-067/@-3.6604152,-45.3771547,15z/data=!4m6!3m5!1s0x92ca9d4b2e02b10b:0x5d979d8b214cfd8a!8m2!3d-3.6604152!4d-45.3771547!16s%2Fg%2F11mlm1zxl3?hl=pt" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg> Abrir no Google Maps</a>
+          <a class="btn btn--cream" style="box-shadow:0 8px 20px -10px rgba(0,0,0,.4)" href="https://www.google.com/maps/dir/?api=1&destination=-3.6604152,-45.3771547" target="_blank" rel="noopener">Traçar rota <svg><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+
+      <div class="infocard reveal right d1">
+        <h3>Floranze</h3>
+        <div class="info"><svg><use href="#i-pin"/></svg><div><b>Endereço</b><span>Rua Nova, 443-B — Centro<br>Santa Inês/MA · 65300-067</span></div></div>
+        <div class="info"><svg><use href="#i-clock"/></svg><div><b>Funcionamento</b><span>Quarta a segunda-feira<br>11h30 às 19h00 · fechado às terças</span></div></div>
+        <div class="info"><svg><use href="#i-bag"/></svg><div><b>Pedidos</b><span>Consumo no local, retirada e delivery</span></div></div>
+        <a class="btn" href="https://wa.me/5598984360297?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg> Falar no WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- 05 RODAPÉ -->
+<footer class="footer">
+  <svg class="wave-top" viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V40C260 0 520 10 760 40s460 30 680 0v50z" fill="#f7f2ec"/></svg>
+  <div class="container">
+    <div class="footer__cta">
+      <span class="eyebrow reveal">Bateu a vontade?</span>
+      <h2 class="reveal d1">Seu próximo momento <em>doce</em> começa aqui</h2>
+      <div class="row reveal d2">
+        <a href="https://floranze.bigd.im" target="_blank" rel="noopener" class="btn btn--cream">Ver catálogo <svg><use href="#i-arrow"/></svg></a>
+        <a href="https://wa.me/5598984360297?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener" class="btn btn--ghost"><svg><use href="#i-wa"/></svg> Falar no WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer__grid">
+      <div class="footer__brand"><img src="img/logo-light.png" alt="Floranze Brownies e Cookies"><p>Cookies artesanais, brownies e cafés. Sabores que florescem com afeto.</p></div>
+      <div><h4>Contato</h4><ul>
+        <li><a href="https://wa.me/5598984360297?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">(98) 98436-0297</a></li>
+        <li><a href="mailto:floranze.co@gmail.com">floranze.co@gmail.com</a></li>
+        <li><a href="https://instagram.com/floranze.co" target="_blank" rel="noopener">@floranze.co</a></li></ul></div>
+      <div><h4>Endereço</h4><ul><li>Rua Nova, 443-B</li><li>Centro · Santa Inês/MA</li><li><a href="#visite">Ver no mapa →</a></li></ul></div>
+      <div><h4>Horário</h4><ul><li>Quarta a segunda</li><li>11h30 às 19h00</li><li>Fechado às terças</li></ul></div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="ano">2026</span> Floranze Brownies e Cookies. Todos os direitos reservados.</span>
+      <button class="to-top" id="toTop">Voltar ao topo <svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" id="waFloat" href="https://wa.me/5598984360297?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener" aria-label="Fale conosco no WhatsApp"><svg><use href="#i-wa"/></svg></a>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nav = document.getElementById('nav'), wa = document.getElementById('waFloat');
+
+  document.getElementById('toggle').addEventListener('click',()=>nav.classList.toggle('open'));
+  document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+  document.getElementById('toTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:reduce?'auto':'smooth'}));
+  document.getElementById('ano').textContent = new Date().getFullYear();
+
+  // Revelação ao rolar
+  const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Parallax + estados de scroll
+  const px=[...document.querySelectorAll('[data-parallax]')];
+  const links=[...document.querySelectorAll('#menu a[href^="#"]')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+  let tick=false;
+  function update(){
+    const y=scrollY, vh=innerHeight;
+    nav.classList.toggle('scrolled',y>40);
+    wa.classList.toggle('show',y>vh*.6);
+    let cur=0; secs.forEach((s,i)=>{ if(s && s.getBoundingClientRect().top<vh*.4) cur=i; });
+    links.forEach((a,i)=>a.classList.toggle('active',i===cur));
+    if(!reduce) px.forEach(el=>{
+      const s=parseFloat(el.dataset.parallax), r=el.parentElement.getBoundingClientRect();
+      if(r.bottom<-250||r.top>vh+250) return;
+      el.style.transform=`translate3d(0,${(-(r.top+r.height/2-vh/2)*s).toFixed(1)}px,0)`;
+    });
+    tick=false;
+  }
+  addEventListener('scroll',()=>{ if(!tick){ requestAnimationFrame(update); tick=true; } },{passive:true});
+  addEventListener('resize',update); update();
+
+  // Gotejamento de chocolate
+  (function(){
+    const svg=document.getElementById('drips'); let rnd=11; const r=()=>(rnd=(rnd*9301+49297)%233280)/233280;
+    let g='<g filter="url(#goo)" fill="#3e261d"><rect x="-20" y="0" width="1480" height="46"/>', x=12;
+    while(x<1430){ const w=20+r()*26,h=26+r()*82,du=4+r()*5,dl=-r()*6;
+      g+=`<rect class="dr" x="${x.toFixed(0)}" y="20" width="${w.toFixed(0)}" height="${h.toFixed(0)}" rx="${(w/2).toFixed(0)}" style="animation-duration:${du.toFixed(1)}s;animation-delay:${dl.toFixed(1)}s"/>`;
+      x+=w+14+r()*40; }
+    svg.insertAdjacentHTML('beforeend',g+'</g>');
+  })();
+
+  // Cards do topo: brilho que segue o mouse + inclinação 3D
+  document.querySelectorAll('.acard').forEach(c=>{
+    c.addEventListener('pointermove',e=>{
+      if(e.pointerType!=='mouse') return;
+      const b=c.getBoundingClientRect(), x=e.clientX-b.left, y=e.clientY-b.top;
+      c.style.setProperty('--mx',x+'px'); c.style.setProperty('--my',y+'px');
+      const rx=((y/b.height)-.5)*-8, ry=((x/b.width)-.5)*8;
+      c.style.transform=`perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+    });
+    c.addEventListener('pointerleave',()=>{c.style.transform='';});
+  });
+
+  // Cena do cookie (animada pelo scroll)
+  const scene=document.getElementById('scene'), cookie=document.getElementById('cookie'), ring=document.getElementById('ring'), sceneCta=document.getElementById('sceneCta');
+  const calls=[...document.querySelectorAll('.callout')], crumbBox=document.getElementById('crumbs');
+  const ccols=['#c98f52','#e4b97e','#3e261d','#6b4434','#8e1a2e','#d9a86c'];
+  const crumbs=[...Array(16)].map((_,k)=>{
+    const el=document.createElement('i'), a=(k/16)*Math.PI*2+Math.random()*.5, sz=6+Math.random()*12;
+    el.className='crumb'; el.style.width=sz+'px'; el.style.height=sz*(.7+Math.random()*.3)+'px'; el.style.background=ccols[k%ccols.length];
+    crumbBox.appendChild(el); return {el,a,d:200+Math.random()*190,rot:Math.random()*540};
+  });
+  function sceneUpdate(){
+    const r=scene.getBoundingClientRect(), vh=innerHeight;
+    if(r.bottom<-50||r.top>vh+50) return;
+    const p=Math.min(1,Math.max(0,-r.top/(r.height-vh)));
+    cookie.style.transform=`translate3d(0,${((.5-p)*70).toFixed(1)}px,0) rotate(${(-40+p*400).toFixed(1)}deg) scale(${(.78+.32*Math.sin(Math.PI*p)).toFixed(3)})`;
+    ring.style.transform=`rotate(${(-p*230).toFixed(1)}deg)`;
+    const idx=p<.1?-1:p<.37?0:p<.64?1:p<.92?2:-1;
+    calls.forEach((c,i)=>c.classList.toggle('on',i===idx));
+    sceneCta.classList.toggle('on',p>.9);
+    const o=Math.min(1,p*4)*(1-Math.max(0,(p-.85)*6)), e=1-Math.pow(1-p,2);
+    const scale=innerWidth<700?.55:1;
+    crumbs.forEach(c=>{
+      const x=Math.cos(c.a)*c.d*e*scale, y=Math.sin(c.a)*c.d*e*scale+p*p*50;
+      c.el.style.transform=`translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) rotate(${(c.rot*p).toFixed(0)}deg)`; c.el.style.opacity=o.toFixed(2);
+    });
+  }
+  if(!reduce){ addEventListener('scroll',()=>requestAnimationFrame(sceneUpdate),{passive:true}); addEventListener('resize',sceneUpdate); sceneUpdate(); }
+
+  // Carrossel
+  const track=document.getElementById('track'), n=track.children.length;
+  let i=0, timer;
+  const vis=()=>innerWidth>1020?3:(innerWidth>640?2:1);
+  function go(k){
+    const max=n-vis(); i=k>max?0:(k<0?max:k);
+    const w=track.children[0].getBoundingClientRect().width;
+    track.style.transform=`translateX(-${i*w}px)`;
+  }
+  const play=()=>{ clearInterval(timer); if(!reduce) timer=setInterval(()=>go(i+1),3800); };
+  document.getElementById('next').onclick=()=>{go(i+1);play();};
+  document.getElementById('prev').onclick=()=>{go(i-1);play();};
+  addEventListener('resize',()=>go(0)); go(0); play();
+
+  // Aberto / fechado (horário de Brasília)
+  const st=document.getElementById('status');
+  const now=new Date(Date.now()+(new Date().getTimezoneOffset()-180)*60000);
+  const d=now.getDay(), m=now.getHours()*60+now.getMinutes();
+  if(!(d!==2 && m>=690 && m<1140)){
+    st.classList.add('closed');
+    st.querySelector('span').textContent=(d===2||(d===1&&m>=1140))?'Fechado · reabrimos quarta às 11h30':(m<690?'Abrimos hoje às 11h30':'Fechado agora · abrimos amanhã 11h30');
+  }
+})();
+</script>
+</body>
+</html>
